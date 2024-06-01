@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.app.TestDemo" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-12-21T08:26:28" hostname="Diptis-MacBook-Pro.local" time="0.56">
+<testsuite name="com.example.app.TestDemo" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-06-01T16:12:36" hostname="Diptis-MacBook-Pro.local" time="0.501">
   <properties/>
-  <testcase name="testViewDetails()" classname="com.example.app.TestDemo" time="0.086"/>
-  <testcase name="getGeocode()" classname="com.example.app.TestDemo" time="0.355"/>
-  <testcase name="testEnterDetails()" classname="com.example.app.TestDemo" time="0.037"/>
+  <testcase name="testViewDetails()" classname="com.example.app.TestDemo" time="0.106"/>
+  <testcase name="getGeocode()" classname="com.example.app.TestDemo" time="0.326"/>
+  <testcase name="testEnterDetails()" classname="com.example.app.TestDemo" time="0.068"/>
   <system-out><![CDATA[Initializing...
-Java version : 17.0.9 (IBM Corporation) aarch64
+Java version : 21.0.1 (Oracle Corporation) aarch64
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

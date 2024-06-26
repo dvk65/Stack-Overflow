@@ -27,9 +27,11 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+        with:
+          gradle-version: '8.4'
 
       - name: Run with Gradle
         run: ./gradlew run
+        with:
+          gradle-version: '8.4'
 
-      - name: Test with Gradle
-        run: ./gradlew test

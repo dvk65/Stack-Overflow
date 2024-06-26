@@ -1,4 +1,4 @@
-name: Build, Test, and Deploy
+name: Build
 
 on:
   workflow_dispatch:
@@ -27,3 +27,9 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
+      - name: Run with Gradle
+        run: ./gradlew run
+
+      - name: Test with Gradle
+        run: ./gradlew test

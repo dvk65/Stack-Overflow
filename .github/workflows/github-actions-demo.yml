@@ -60,6 +60,4 @@ jobs:
         env:
           PGPASSWORD: Post23@me
 
-      - name: Run with Gradle
-        run: ./gradlew run
 

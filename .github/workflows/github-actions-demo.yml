@@ -60,9 +60,6 @@ jobs:
         env:
           PGPASSWORD: Post23@me
 
-      - name: Setup Database
-        run: ./gradlew flywayMigrate
-
       - name: Run with Gradle
         run: ./gradlew run
 

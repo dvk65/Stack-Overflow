@@ -53,6 +53,13 @@ jobs:
             sleep 2
           done
 
+      - name: Set up Database and Verify Table
+        run: |
+          psql -h localhost -U postgres -d postgres -c "CREATE TABLE IF NOT EXISTS wildlife_tracker (Address CHARACTER VARYING (500), Species TEXT, Quantity INTEGER, Ecosystem CHARACTER VARYING);"
+          psql -h localhost -U postgres -d postgres -c "\dt"
+        env:
+          PGPASSWORD: Post23@me
+
       - name: Setup Database
         run: ./gradlew flywayMigrate
 

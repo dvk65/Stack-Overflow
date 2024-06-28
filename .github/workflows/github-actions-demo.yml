@@ -6,13 +6,14 @@ on:
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
-    container: node:10.18-jessie
 
     services:
       postgres:
         image: postgres
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: Post23@me
+          POSTGRES_DB: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -23,16 +24,7 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: npm ci
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-
-      - name: Connect to PostgreSQL
-        run: node client.js
+        uses: actions/checkout@v2
 
       # - name: Validate Gradle Wrapper
       #   uses: gradle/wrapper-validation-action@v1
@@ -45,13 +37,6 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-#      - name: Wait for PostgreSQL to be ready
-#        run: |
-#          until pg_isready -h localhost -p 5432 -U postgres; do
-#            echo "Waiting for PostgreSQL..."
-#            sleep 2
-#          done
-
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
@@ -60,6 +45,16 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -p 5432 -U postgres; do
+            echo "Waiting for PostgreSQL..."
+            sleep 2
+          done
+
+      - name: Setup Database
+        run: ./gradlew flywayMigrate
 
       - name: Run with Gradle
         run: ./gradlew run

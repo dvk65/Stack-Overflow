@@ -1,7 +1,15 @@
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Closure
+
 plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'idea'
+}
+
+application {
+    //applicationDefaultJvmArgs = ['-Dgreeting.language=en']
+    mainModule = "com.example.app"
+    mainClass = "com.example.app.App"
 }
 
 idea {
@@ -43,13 +51,6 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.graphics', 'javafx.fxml', 'javafx.web', 'javafx.media' ]
 }
 
-
-
-application {
-    mainModule = "com.example.app"
-    mainClass = "com.example.app.App"
-}
-
 task copyNatives(type: Copy) {
     description = "Copies the arcgis native libraries into the .arcgis directory for development."
     group = "build"
@@ -61,7 +62,9 @@ task copyNatives(type: Copy) {
 
 run {
     dependsOn copyNatives
-    mainClassName = 'com.example.app.App'
+    doFirst{
+        println 'Running application'
+    }
 }
 
 wrapper {

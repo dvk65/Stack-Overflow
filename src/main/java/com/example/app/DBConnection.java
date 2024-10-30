@@ -24,11 +24,11 @@ public class DBConnection {
     /**
      * This method makes sure that data inputted by the user is stored in this postgresql database
      * @param address where the species was spotted
-     * @param species which species was spotted
+     * @param itemName which species was spotted
      * @param quantity how many of the species were there
-     * @param ecosystem in which ecosystem was the specie spotted
+     * @param resourceType in which ecosystem was the specie spotted
      */
-    public void enterSpecies(String address, String species, int quantity, String ecosystem){
+    public void enterSpecies(String address, String itemName, int quantity, String resourceType){
         try {
             //Define database connection properties
             String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
@@ -39,12 +39,12 @@ public class DBConnection {
             Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
             //Prepare an SQL INSERT statement
-            String insertSQL = "INSERT INTO wildlife_tracker (\"Address\", \"Species\", \"Quantity\", \"Ecosystem\") VALUES (?, ?, ?, ?)";
+            String insertSQL = "INSERT INTO resource_locations (\"Address\", \"ItemName\", \"Quantity\", \"ResourceType\") VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(insertSQL);
             preparedStatement.setString(1, address);
-            preparedStatement.setString(2, species);
+            preparedStatement.setString(2, itemName);
             preparedStatement.setInt(3, quantity);
-            preparedStatement.setString(4, ecosystem);
+            preparedStatement.setString(4, resourceType);
 
             //Execute the INSERT statement
             preparedStatement.executeUpdate();
@@ -75,8 +75,8 @@ public class DBConnection {
             Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
             //Execute the SELECT statement based on the ecosystem selected
-            if (checkBoxValue.equals("Forest")){
-                String receiveAddressSQL = "SELECT \"Address\",\"Species\",\"Quantity\" FROM wildlife_tracker WHERE \"Ecosystem\"='Forest'";
+            if (checkBoxValue.equals("Medication")){
+                String receiveAddressSQL = "SELECT \"Address\",\"ItemName\",\"Quantity\" FROM resource_locations WHERE \"ResourceType\"='Medication'";
 
                 PreparedStatement preparedStatementAddress = conn.prepareStatement(receiveAddressSQL);
 
@@ -84,7 +84,7 @@ public class DBConnection {
 
                 while(rs.next()){
                     String addresses = rs.getString("Address");
-                    String species = rs.getString("Species");
+                    String species = rs.getString("ItemName");
                     Integer quantityNum = rs.getInt("Quantity");
                     String quantity = String.valueOf(quantityNum);
                     Locations.put(addresses,new ArrayList<>());
@@ -94,14 +94,14 @@ public class DBConnection {
                     valueList.add(quantity);
                 }
             }
-            else if (checkBoxValue.equals("Wetland")){
-                String receiveSQL = "SELECT \"Address\",\"Species\",\"Quantity\" FROM wildlife_tracker WHERE \"Ecosystem\"='Wetland'";
+            else if (checkBoxValue.equals("Water")){
+                String receiveSQL = "SELECT \"Address\",\"ItemName\",\"Quantity\" FROM resource_locations WHERE \"ResourceType\"='Water'";
                 PreparedStatement preparedStatement = conn.prepareStatement(receiveSQL);
 
                 ResultSet rs = preparedStatement.executeQuery();
                 while(rs.next()){
                     String addresses = rs.getString("Address");
-                    String species = rs.getString("Species");
+                    String species = rs.getString("ItemName");
                     Integer quantityNum = rs.getInt("Quantity");
                     String quantity = String.valueOf(quantityNum);
                     Locations.put(addresses,new ArrayList<>());
@@ -111,14 +111,48 @@ public class DBConnection {
                     valueList.add(quantity);
                 }
             }
-            else if (checkBoxValue.equals("Grassland")){
-                String receiveSQL = "SELECT \"Address\",\"Species\",\"Quantity\" FROM wildlife_tracker WHERE \"Ecosystem\"='Grassland'";
+            else if (checkBoxValue.equals("Food")){
+                String receiveSQL = "SELECT \"Address\",\"ItemName\",\"Quantity\" FROM resource_locations WHERE \"ResourceType\"='Food'";
                 PreparedStatement preparedStatement = conn.prepareStatement(receiveSQL);
 
                 ResultSet rs = preparedStatement.executeQuery();
                 while(rs.next()){
                     String addresses = rs.getString("Address");
-                    String species = rs.getString("Species");
+                    String species = rs.getString("ItemName");
+                    Integer quantityNum = rs.getInt("Quantity");
+                    String quantity = String.valueOf(quantityNum);
+                    Locations.put(addresses,new ArrayList<>());
+                    String key = addresses;
+                    List<String> valueList = Locations.get(key);
+                    valueList.add(species);
+                    valueList.add(quantity);
+                }
+            }
+            else if (checkBoxValue.equals("Shelter")){
+                String receiveSQL = "SELECT \"Address\",\"ItemName\",\"Quantity\" FROM resource_locations WHERE \"ResourceType\"='Shelter'";
+                PreparedStatement preparedStatement = conn.prepareStatement(receiveSQL);
+
+                ResultSet rs = preparedStatement.executeQuery();
+                while(rs.next()){
+                    String addresses = rs.getString("Address");
+                    String species = rs.getString("ItemName");
+                    Integer quantityNum = rs.getInt("Quantity");
+                    String quantity = String.valueOf(quantityNum);
+                    Locations.put(addresses,new ArrayList<>());
+                    String key = addresses;
+                    List<String> valueList = Locations.get(key);
+                    valueList.add(species);
+                    valueList.add(quantity);
+                }
+            }
+            else if (checkBoxValue.equals("Electronics")){
+                String receiveSQL = "SELECT \"Address\",\"ItemName\",\"Quantity\" FROM resource_locations WHERE \"ResourceType\"='Electronics'";
+                PreparedStatement preparedStatement = conn.prepareStatement(receiveSQL);
+
+                ResultSet rs = preparedStatement.executeQuery();
+                while(rs.next()){
+                    String addresses = rs.getString("Address");
+                    String species = rs.getString("ItemName");
                     Integer quantityNum = rs.getInt("Quantity");
                     String quantity = String.valueOf(quantityNum);
                     Locations.put(addresses,new ArrayList<>());
@@ -129,12 +163,12 @@ public class DBConnection {
                 }
             }
             else if (checkBoxValue.isEmpty()){
-                String receiveSQL = "SELECT * FROM wildlife_tracker";
+                String receiveSQL = "SELECT * FROM resource_locations";
                 PreparedStatement preparedStatement = conn.prepareStatement(receiveSQL);
                 ResultSet rs = preparedStatement.executeQuery();
                 while(rs.next()){
                     String addresses = rs.getString("Address");
-                    String species = rs.getString("Species");
+                    String species = rs.getString("ItemName");
                     Integer quantityNum = rs.getInt("Quantity");
                     String quantity = String.valueOf(quantityNum);
                     Locations.put(addresses,new ArrayList<>());

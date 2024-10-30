@@ -51,29 +51,33 @@ public class App extends Application {
     GraphicsOverlay graphicsOverlay;
     private LocatorTask locatorTask;
     private TextField searchBox;
-    private TextField speciesBox;
+    private TextField itemBox;
     private TextField quantityBox;
     private Button buttonSearch;
     private Button buttonDetails;
     private Text details;
     private Text choose;
-    private RadioButton wetland;
-    private RadioButton grassland;
-    private RadioButton forest;
+    private RadioButton medication;
+    private RadioButton water;
+    private RadioButton food;
+    private RadioButton shelter;
+    private RadioButton electronics;
     private RadioButton view;
     private RadioButton enter;
     private Button startButton;
     private Text options;
     public DBConnection dbConnection;
-    private RadioButton viewForest;
-    private RadioButton viewWetland;
-    private RadioButton viewGrassland;
+    private RadioButton viewFood;
+    private RadioButton viewMedication;
+    private RadioButton viewWater;
+    private RadioButton viewShelter;
+    private RadioButton viewElectronics;
     private RadioButton all;
     private Text selectView;
     private Button viewButton;
     private Button globeButton;
     private Text seeGlobe;
-    String species;
+    String itemname;
 
     /**
      * The main class that starts the Application
@@ -138,8 +142,8 @@ public class App extends Application {
 
         StackPane.setAlignment(searchBox, Pos.TOP_LEFT);
         StackPane.setMargin(searchBox, new Insets(10, 0, 0, 10));
-        StackPane.setAlignment(speciesBox, Pos.TOP_LEFT);
-        StackPane.setMargin(speciesBox, new Insets(45, 0, 0, 10));
+        StackPane.setAlignment(itemBox, Pos.TOP_LEFT);
+        StackPane.setMargin(itemBox, new Insets(45, 0, 0, 10));
         StackPane.setAlignment(quantityBox, Pos.TOP_LEFT);
         StackPane.setMargin(quantityBox, new Insets(80, 0, 0, 10));
         StackPane.setAlignment(buttonSearch, Pos.TOP_LEFT);
@@ -150,25 +154,33 @@ public class App extends Application {
         StackPane.setMargin(details, new Insets(330, 0, 0, 20));
         StackPane.setAlignment(choose,Pos.TOP_LEFT);
         StackPane.setMargin(choose, new Insets(115,0,0,10));
-        StackPane.setAlignment(wetland, Pos.TOP_LEFT);
-        StackPane.setMargin(wetland, new Insets(150, 0, 0, 10));
-        StackPane.setAlignment(grassland, Pos.TOP_LEFT);
-        StackPane.setMargin(grassland, new Insets(150, 0, 0, 110));
-        StackPane.setAlignment(forest, Pos.TOP_LEFT);
-        StackPane.setMargin(forest, new Insets(150, 0, 0, 210));
+        StackPane.setAlignment(water, Pos.TOP_LEFT);
+        StackPane.setMargin(water, new Insets(150, 0, 0, 10));
+        StackPane.setAlignment(food, Pos.TOP_LEFT);
+        StackPane.setMargin(food, new Insets(150, 0, 0, 110));
+        StackPane.setAlignment(medication, Pos.TOP_LEFT);
+        StackPane.setMargin(medication, new Insets(150, 0, 0, 210));
+        StackPane.setAlignment(electronics, Pos.TOP_LEFT);
+        StackPane.setMargin(electronics, new Insets(150, 0, 0, 310));
+        StackPane.setAlignment(shelter, Pos.TOP_LEFT);
+        StackPane.setMargin(shelter, new Insets(150, 0, 0, 410));
 
         StackPane.setAlignment(selectView, Pos.BOTTOM_LEFT);
-        StackPane.setMargin(selectView, new Insets(0,10,250,70));
-        StackPane.setAlignment(viewForest, Pos.BOTTOM_LEFT);
-        StackPane.setMargin(viewForest, new Insets(0,10,210,70));
-        StackPane.setAlignment(viewWetland, Pos.BOTTOM_LEFT);
-        StackPane.setMargin(viewWetland, new Insets(0,10,170,70));
-        StackPane.setAlignment(viewGrassland, Pos.BOTTOM_LEFT);
-        StackPane.setMargin(viewGrassland, new Insets(0,10,130,70));
+        StackPane.setMargin(selectView, new Insets(0,10,290,70));
+        StackPane.setAlignment(viewFood, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(viewFood, new Insets(0,10,250,70));
+        StackPane.setAlignment(viewWater, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(viewWater, new Insets(0,10,210,70));
+        StackPane.setAlignment(viewShelter, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(viewShelter, new Insets(0,10,170,70));
+        StackPane.setAlignment(viewMedication, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(viewMedication, new Insets(0,10,130,70));
+        StackPane.setAlignment(viewElectronics, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(viewElectronics, new Insets(0,10,90,70));
         StackPane.setAlignment(all, Pos.BOTTOM_LEFT);
-        StackPane.setMargin(all, new Insets(0,10,90,70));
+        StackPane.setMargin(all, new Insets(0,10,50,70));
         StackPane.setAlignment(viewButton, Pos.BOTTOM_LEFT);
-        StackPane.setMargin(viewButton, new Insets(0,10,50,70));
+        StackPane.setMargin(viewButton, new Insets(0,10,10,70));
 
         StackPane.setAlignment(globeButton, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(globeButton, new Insets(0,70,130,10));
@@ -179,18 +191,22 @@ public class App extends Application {
         buttonDetails.setVisible(false);
         details.setVisible(false);
         searchBox.setVisible(false);
-        speciesBox.setVisible(false);
+        itemBox.setVisible(false);
         quantityBox.setVisible(false);
         buttonSearch.setVisible(false);
-        wetland.setVisible(false);
-        grassland.setVisible(false);
-        forest.setVisible(false);
+        water.setVisible(false);
+        shelter.setVisible(false);
+        food.setVisible(false);
+        medication.setVisible(false);
+        electronics.setVisible(false);
         choose.setVisible(false);
 
         viewButton.setVisible(false);
-        viewForest.setVisible(false);
-        viewGrassland.setVisible(false);
-        viewWetland.setVisible(false);
+        viewFood.setVisible(false);
+        viewShelter.setVisible(false);
+        viewWater.setVisible(false);
+        viewMedication.setVisible(false);
+        viewElectronics.setVisible(false);
         selectView.setVisible(false);
         all.setVisible(false);
 
@@ -214,21 +230,25 @@ public class App extends Application {
             //All elements on the map are added to the mapView's stackPane named stackPaneMap
             //Elements if enter option is selected on the globe scene
             stackPaneMap.getChildren().add(searchBox);
-            stackPaneMap.getChildren().add(speciesBox);
+            stackPaneMap.getChildren().add(itemBox);
             stackPaneMap.getChildren().add(quantityBox);
             stackPaneMap.getChildren().add(buttonSearch);
             stackPaneMap.getChildren().add(buttonDetails);
             stackPaneMap.getChildren().add(details);
             stackPaneMap.getChildren().add(choose);
-            stackPaneMap.getChildren().add(wetland);
-            stackPaneMap.getChildren().add(grassland);
-            stackPaneMap.getChildren().add(forest);
+            stackPaneMap.getChildren().add(water);
+            stackPaneMap.getChildren().add(shelter);
+            stackPaneMap.getChildren().add(food);
+            stackPaneMap.getChildren().add(medication);
+            stackPaneMap.getChildren().add(electronics);
 
             //Elements if view option is selected on the globe scene
             stackPaneMap.getChildren().add(viewButton);
-            stackPaneMap.getChildren().add(viewForest);
-            stackPaneMap.getChildren().add(viewGrassland);
-            stackPaneMap.getChildren().add(viewWetland);
+            stackPaneMap.getChildren().add(viewFood);
+            stackPaneMap.getChildren().add(viewShelter);
+            stackPaneMap.getChildren().add(viewWater);
+            stackPaneMap.getChildren().add(viewElectronics);
+            stackPaneMap.getChildren().add(viewMedication);
             stackPaneMap.getChildren().add(selectView);
             stackPaneMap.getChildren().add(all);
 
@@ -249,16 +269,20 @@ public class App extends Application {
                 if (enter.isSelected()) {
                     //As enter is selected on the screen, setting all the fields required for entering to true
                     searchBox.setVisible(true);
-                    speciesBox.setVisible(true);
+                    itemBox.setVisible(true);
                     quantityBox.setVisible(true);
                     buttonSearch.setVisible(true);
-                    wetland.setVisible(true);
-                    grassland.setVisible(true);
-                    forest.setVisible(true);
+                    water.setVisible(true);
+                    food.setVisible(true);
+                    shelter.setVisible(true);
+                    electronics.setVisible(true);
+                    medication.setVisible(true);
                     choose.setVisible(true);
-                    wetland.setOnAction(radioEvent -> handleRadioButton());
-                    grassland.setOnAction(radioEvent -> handleRadioButton());
-                    forest.setOnAction(radioEvent -> handleRadioButton());
+                    water.setOnAction(radioEvent -> handleRadioButton());
+                    food.setOnAction(radioEvent -> handleRadioButton());
+                    shelter.setOnAction(radioEvent -> handleRadioButton());
+                    electronics.setOnAction(radioEvent -> handleRadioButton());
+                    medication.setOnAction(radioEvent -> handleRadioButton());
 
                 /**
                  * On clicking search button after entering the three fields and selecting the ecosystem:
@@ -276,12 +300,16 @@ public class App extends Application {
         //As view is selected on the screen, setting all the fields required for viewing to true
         if(view.isSelected()){
             viewButton.setVisible(true);
-            viewForest.setVisible(true);
-            viewForest.setOnAction(vradioEvent->handleRadioButton());
-            viewGrassland.setVisible(true);
-            viewGrassland.setOnAction(vradioEvent->handleRadioButton());
-            viewWetland.setVisible(true);
-            viewWetland.setOnAction(vradioEvent->handleRadioButton());
+            viewFood.setVisible(true);
+            viewFood.setOnAction(vradioEvent->handleRadioButton());
+            viewWater.setVisible(true);
+            viewWater.setOnAction(vradioEvent->handleRadioButton());
+            viewMedication.setVisible(true);
+            viewMedication.setOnAction(vradioEvent->handleRadioButton());
+            viewShelter.setVisible(true);
+            viewShelter.setOnAction(vradioEvent->handleRadioButton());
+            viewElectronics.setVisible(true);
+            viewElectronics.setOnAction(vradioEvent->handleRadioButton());
             all.setVisible(true);
             all.setOnAction(vradioEvent->handleRadioButton());
             selectView.setVisible(true);
@@ -309,18 +337,22 @@ public class App extends Application {
         //The sceneGlobe is set to stage and the visibility of elements on that scene is set to true
         globeButton.setOnAction(globeEvent -> {
             searchBox.setVisible(false);
-            speciesBox.setVisible(false);
+            itemBox.setVisible(false);
             quantityBox.setVisible(false);
             buttonSearch.setVisible(false);
-            wetland.setVisible(false);
-            grassland.setVisible(false);
-            forest.setVisible(false);
+            water.setVisible(false);
+            shelter.setVisible(false);
+            food.setVisible(false);
+            medication.setVisible(false);
+            electronics.setVisible(false);
             choose.setVisible(false);
             buttonDetails.setVisible(false);
             selectView.setVisible(false);
-            viewForest.setVisible(false);
-            viewGrassland.setVisible(false);
-            viewWetland.setVisible(false);
+            viewFood.setVisible(false);
+            viewShelter.setVisible(false);
+            viewWater.setVisible(false);
+            viewMedication.setVisible(false);
+            viewElectronics.setVisible(false);
             all.setVisible(false);
             viewButton.setVisible(false);
             mapView.dispose();
@@ -341,37 +373,77 @@ public class App extends Application {
      * handleRadioButton makes sure this happens in sets of Radio buttons used in the view and enter sections
      */
     void handleRadioButton() {
-        if (viewForest.isSelected()){
-            viewGrassland.setSelected(false);
-            viewWetland.setSelected(false);
+        if (viewFood.isSelected()){
+            viewShelter.setSelected(false);
+            viewWater.setSelected(false);
+            viewElectronics.setSelected(false);
+            viewMedication.setSelected(false);
             all.setSelected(false);
         }
-        if (viewGrassland.isSelected()){
-            viewForest.setSelected(false);
-            viewWetland.setSelected(false);
+        if (viewShelter.isSelected()){
+            viewFood.setSelected(false);
+            viewWater.setSelected(false);
+            viewElectronics.setSelected(false);
+            viewMedication.setSelected(false);
             all.setSelected(false);
         }
-        if (viewWetland.isSelected()){
-            viewGrassland.setSelected(false);
-            viewForest.setSelected(false);
+        if (viewWater.isSelected()){
+            viewShelter.setSelected(false);
+            viewFood.setSelected(false);
+            viewMedication.setSelected(false);
+            viewElectronics.setSelected(false);
+            all.setSelected(false);
+        }
+        if (viewMedication.isSelected()){
+            viewFood.setSelected(false);
+            viewWater.setSelected(false);
+            viewElectronics.setSelected(false);
+            viewShelter.setSelected(false);
+            all.setSelected(false);
+        }
+        if (viewElectronics.isSelected()){
+            viewShelter.setSelected(false);
+            viewFood.setSelected(false);
+            viewMedication.setSelected(false);
+            viewWater.setSelected(false);
             all.setSelected(false);
         }
         if (all.isSelected()){
-            viewGrassland.setSelected(false);
-            viewWetland.setSelected(false);
-            viewForest.setSelected(false);
+            viewShelter.setSelected(false);
+            viewFood.setSelected(false);
+            viewMedication.setSelected(false);
+            viewWater.setSelected(false);
+            viewElectronics.setSelected(false);
         }
-        if(wetland.isSelected()){
-            grassland.setSelected(false);
-            forest.setSelected(false);
+        if(water.isSelected()){
+            shelter.setSelected(false);
+            food.setSelected(false);
+            medication.setSelected(false);
+            electronics.setSelected(false);
         }
-        if(grassland.isSelected()){
-            wetland.setSelected(false);
-            forest.setSelected(false);
+        if(shelter.isSelected()){
+            water.setSelected(false);
+            food.setSelected(false);
+            medication.setSelected(false);
+            electronics.setSelected(false);
         }
-        if(forest.isSelected()){
-            grassland.setSelected(false);
-            wetland.setSelected(false);
+        if(food.isSelected()){
+            shelter.setSelected(false);
+            water.setSelected(false);
+            electronics.setSelected(false);
+            medication.setSelected(false);
+        }
+        if(electronics.isSelected()){
+            shelter.setSelected(false);
+            water.setSelected(false);
+            food.setSelected(false);
+            medication.setSelected(false);
+        }
+        if(medication.isSelected()){
+            shelter.setSelected(false);
+            water.setSelected(false);
+            electronics.setSelected(false);
+            food.setSelected(false);
         }
     }
 
@@ -389,40 +461,52 @@ public class App extends Application {
 
     void enterFields(){
         mapView.setViewpoint(new Viewpoint(34.02700, -118.80543, 144447.638572));
-        wetland.setOnAction(radioEvent -> handleRadioButton());
-        grassland.setOnAction(radioEvent -> handleRadioButton());
-        forest.setOnAction(radioEvent -> handleRadioButton());
+        water.setOnAction(radioEvent -> handleRadioButton());
+        shelter.setOnAction(radioEvent -> handleRadioButton());
+        medication.setOnAction(radioEvent -> handleRadioButton());
+        electronics.setOnAction(radioEvent -> handleRadioButton());
+        food.setOnAction(radioEvent -> handleRadioButton());
         String address = searchBox.getText();
-        species = speciesBox.getText();
+        itemname = itemBox.getText();
         int quantity = Integer.parseInt(quantityBox.getText());
-        String ecosystem = "";
-        if (wetland.isSelected()){
-            ecosystem="Wetland";
-            wetland.setSelected(false);
+        String resourceType = "";
+        if (water.isSelected()){
+            resourceType="Water";
+            water.setSelected(false);
         }
-        if (grassland.isSelected()){
-            ecosystem="Grassland";
-            grassland.setSelected(false);
+        if (shelter.isSelected()){
+            resourceType="Shelter";
+            shelter.setSelected(false);
         }
-        if (forest.isSelected()){
-            ecosystem="Forest";
-            forest.setSelected(false);
+        if (medication.isSelected()){
+            resourceType="Medication";
+            medication.setSelected(false);
+        }
+        if (food.isSelected()){
+            resourceType="Food";
+            food.setSelected(false);
+        }
+        if (electronics.isSelected()){
+            resourceType="Electronics";
+            electronics.setSelected(false);
         }
 
-        if (!address.isBlank() & !species.isBlank() & quantity >0 & !ecosystem.isEmpty()){
+        if (!address.isBlank() & !itemname.isBlank() & quantity >0 & !resourceType.isEmpty()){
 
-            performGeocode(address, species, String.valueOf(quantity));
-            dbConnection.enterSpecies(address, species, quantity, ecosystem);
+            performGeocode(address, itemname, String.valueOf(quantity));
+            dbConnection.enterSpecies(address, itemname, quantity, resourceType);
             // Clear input fields after successful insertion
             searchBox.clear();
-            speciesBox.clear();
+            itemBox.clear();
             quantityBox.clear();
 
             buttonDetails.setVisible(true);
             selectView.setVisible(true);
-            viewForest.setVisible(true);
-            viewGrassland.setVisible(true);
-            viewWetland.setVisible(true);
+            viewFood.setVisible(true);
+            viewMedication.setVisible(true);
+            viewWater.setVisible(true);
+            viewShelter.setVisible(true);
+            viewElectronics.setVisible(true);
             all.setVisible(true);
             viewButton.setVisible(true);
 
@@ -433,7 +517,7 @@ public class App extends Application {
                 graphicsOverlay.getGraphics().clear();
             });
 
-            details.setText("Species: "+ species + "\n" + "Quantity: "+ quantity+ "\n" +"Ecosystem: "+ecosystem);
+            details.setText("Item Name: "+ itemname + "\n" + "Quantity: "+ quantity+ "\n" +"Resource Type: "+resourceType);
             buttonDetails.setOnAction(eventDetails -> {
                 details.setVisible(true);
                 System.out.println("Details!");
@@ -456,33 +540,45 @@ public class App extends Application {
      */
     void viewFields(){
         mapView.setViewpoint(new Viewpoint(-150.80543, 34.02700, 140000000.638572));
-        viewForest.setOnAction(vradioEvent->handleRadioButton());
-        viewWetland.setOnAction(vradioEvent->handleRadioButton());
-        viewGrassland.setOnAction(vradioEvent->handleRadioButton());
+        viewFood.setOnAction(vradioEvent->handleRadioButton());
+        viewWater.setOnAction(vradioEvent->handleRadioButton());
+        viewShelter.setOnAction(vradioEvent->handleRadioButton());
+        viewElectronics.setOnAction(vradioEvent->handleRadioButton());
+        viewMedication.setOnAction(vradioEvent->handleRadioButton());
         all.setOnAction(vradioEvent->handleRadioButton());
-        if(viewForest.isSelected()){
-            bulkMark(dbConnection.returnDisplayResults("Forest"));
-            viewForest.setSelected(false);
+        if(viewFood.isSelected()){
+            bulkMark(dbConnection.returnDisplayResults("Food"));
+            viewFood.setSelected(false);
         }
-        else if(viewGrassland.isSelected()){
-            bulkMark(dbConnection.returnDisplayResults("Grassland"));
-            viewGrassland.setSelected(false);
+        else if(viewShelter.isSelected()){
+            bulkMark(dbConnection.returnDisplayResults("Shelter"));
+            viewShelter.setSelected(false);
         }
-        else if(viewWetland.isSelected()){
-            bulkMark(dbConnection.returnDisplayResults("Wetland"));
-            viewWetland.setSelected(false);
+        else if(viewWater.isSelected()){
+            bulkMark(dbConnection.returnDisplayResults("Water"));
+            viewWater.setSelected(false);
+        }
+        else if(viewElectronics.isSelected()){
+            bulkMark(dbConnection.returnDisplayResults("Electronics"));
+            viewElectronics.setSelected(false);
+        }
+        else if(viewMedication.isSelected()){
+            bulkMark(dbConnection.returnDisplayResults("Medication"));
+            viewMedication.setSelected(false);
         }
         else if(all.isSelected()){
             bulkMark(dbConnection.returnDisplayResults(""));
             all.setSelected(false);
         }
         searchBox.setVisible(true);
-        speciesBox.setVisible(true);
+        itemBox.setVisible(true);
         quantityBox.setVisible(true);
         buttonSearch.setVisible(true);
-        wetland.setVisible(true);
-        grassland.setVisible(true);
-        forest.setVisible(true);
+        water.setVisible(true);
+        shelter.setVisible(true);
+        food.setVisible(true);
+        electronics.setVisible(true);
+        medication.setVisible(true);
         choose.setVisible(true);
         buttonSearch.setOnAction(enterEvent -> {
             enterFields();
@@ -517,10 +613,10 @@ public class App extends Application {
         startButton.setFont(Font.font(22));
         searchBox = new TextField();
         searchBox.setMaxWidth(400);
-        searchBox.setPromptText("Search for an address");
-        speciesBox = new TextField();
-        speciesBox.setMaxWidth(400);
-        speciesBox.setPromptText("Enter species");
+        searchBox.setPromptText("Enter address");
+        itemBox = new TextField();
+        itemBox.setMaxWidth(400);
+        itemBox.setPromptText("Enter item");
         quantityBox = new TextField();
         quantityBox.setMaxWidth(400);
         quantityBox.setPromptText("Enter quantity");
@@ -529,14 +625,18 @@ public class App extends Application {
         buttonDetails = new Button("Details");
         buttonDetails.setMaxWidth(100);
         details = new Text();
-        wetland = new RadioButton("Wetland");
-        forest = new RadioButton("Forest");
-        grassland = new RadioButton("Grassland");
+        water = new RadioButton("Water");
+        food = new RadioButton("Food");
+        shelter = new RadioButton("Shelter");
+        electronics = new RadioButton("Electronics");
+        medication = new RadioButton("Medication");
         choose = new Text("Choose which ecosystem:");
 
-        viewWetland = new RadioButton("Wetland");
-        viewGrassland = new RadioButton("Grassland");
-        viewForest = new RadioButton("Forest");
+        viewWater = new RadioButton("Water");
+        viewShelter = new RadioButton("Shelter");
+        viewFood = new RadioButton("Food");
+        viewMedication = new RadioButton("Medication");
+        viewElectronics = new RadioButton("Electronics");
         all = new RadioButton("All Entries");
         selectView = new Text("What would you like to view?");
         selectView.setFont(Font.font(15));
@@ -568,19 +668,19 @@ public class App extends Application {
      * The geocodeParameters that were set are passed along with the locatorTask
      * @param address inputted by user when making an entry for a species
      */
-    void performGeocode(String address, String getSpecies, String getQuantity) {
+    void performGeocode(String address, String getItem, String getQuantity) {
         ListenableFuture<List<GeocodeResult>> geocodeResultsFuture = locatorTask.geocodeAsync(address, geocodeParameters);
         geocodeResultsFuture.addDoneListener(() -> {
             try {
                 List<GeocodeResult> geocodes = geocodeResultsFuture.get();
                     GeocodeResult result = geocodes.get(0);
                     System.out.println("Found " + result.getLabel());
-                    System.out.println("animal " + getSpecies);
+                    System.out.println("item " + getItem);
                     System.out.println("quantity " + getQuantity);
                     System.out.println("at " + result.getDisplayLocation());
                     System.out.println("with score " + result.getScore());
 
-                    displayResult(result, getSpecies, getQuantity);
+                    displayResult(result, getItem, getQuantity);
             } catch (InterruptedException | ExecutionException e) {
                 new Alert(Alert.AlertType.ERROR, "Error getting result.").show();
                 e.printStackTrace();
@@ -593,11 +693,11 @@ public class App extends Application {
      * The text and marker styling is specified
      * @param geocodeResult coordinates returned by geocoding the address using performGeocode method
      */
-    private void displayResult(GeocodeResult geocodeResult, String getSpecies, String getQuantity) {
+    private void displayResult(GeocodeResult geocodeResult, String getItem, String getQuantity) {
         // create a graphic to display the address text
         String label = geocodeResult.getLabel();
         TextSymbol textSymbol = new TextSymbol(18, label, Color.BLACK, TextSymbol.HorizontalAlignment.CENTER, TextSymbol.VerticalAlignment.BOTTOM);
-        TextSymbol textSymbol1 = new TextSymbol(15, getSpecies + ": " + getQuantity, Color.BLACK, TextSymbol.HorizontalAlignment.CENTER, TextSymbol.VerticalAlignment.TOP);
+        TextSymbol textSymbol1 = new TextSymbol(15, getItem + ": " + getQuantity, Color.BLACK, TextSymbol.HorizontalAlignment.CENTER, TextSymbol.VerticalAlignment.TOP);
         Graphic textGraphic = new Graphic(geocodeResult.getDisplayLocation(), textSymbol);
         Graphic textGraphic1 = new Graphic(geocodeResult.getDisplayLocation(), textSymbol1);
         graphicsOverlay.getGraphics().add(textGraphic);
